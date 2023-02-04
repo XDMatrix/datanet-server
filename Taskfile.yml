@@ -1,0 +1,26 @@
+version: "3"
+
+tasks:
+    build:
+        desc: Build the app
+        cmds:
+        - GOFLAGS=-mod=mod go build -o bin/datanetserver cmd/main.go
+
+    run: 
+        desc: Run the app
+        cmds:
+        - GOFLAGS=-mod=mod go run cmd/main.go
+
+    swagger.gen:
+        desc: Generate Go code
+        cmds:
+        - GOFLAGS=-mod=mod go generate module xhive.com/datanet/cmd xhive.com/datanet/pkg/swagger
+
+    swagger.validate:
+        desc: Validate swagger
+        cmds:
+        - swagger validate pkg/swagger/swagger.yml
+
+    swagger.doc:
+        desc: Doc for swagger
+        cmds:
